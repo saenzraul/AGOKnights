@@ -14,6 +14,11 @@ namespace AGOKnights
     
     public partial class Office
     {
+        public Office()
+        {
+            this.Budgets = new HashSet<Budget>();
+        }
+    
         public int OfficeId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -24,5 +29,6 @@ namespace AGOKnights
         public virtual Member Member { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual Calendar Calendar { get; set; }
+        public virtual ICollection<Budget> Budgets { get; set; }
     }
 }

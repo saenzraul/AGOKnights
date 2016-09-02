@@ -28,7 +28,7 @@ namespace AGOKnights
         public string Recurrance { get; set; }
         public string Title { get; set; }
         public int LocationId { get; set; }
-        public int AddressId { get; set; }
+        public Nullable<int> AddressId { get; set; }
     
         public virtual Person Host { get; set; }
         public virtual Person Sponsor { get; set; }

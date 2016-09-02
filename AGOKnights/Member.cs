@@ -22,6 +22,8 @@ namespace AGOKnights
         public int MemberId { get; set; }
         public int OrganizationId { get; set; }
         public int PersonId { get; set; }
+        public Nullable<System.DateTime> JoinDate { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual Organization Organization { get; set; }
         public virtual Person Person { get; set; }

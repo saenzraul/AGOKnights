@@ -4,26 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="065408a52f8346619a0bfef743b5612c" Name="Diagram1" ZoomLevel="64" DisplayType="true" >
-        <EntityTypeShape EntityType="AGOKnightsDBModel.Person" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AGOKnightsDBModel.Address" Width="1.5" PointX="0.75" PointY="3.625" />
-        <EntityTypeShape EntityType="AGOKnightsDBModel.Member" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AGOKnightsDBModel.Organization" Width="1.5" PointX="6" PointY="11.875" IsExpanded="true" />
+      <Diagram DiagramId="065408a52f8346619a0bfef743b5612c" Name="Diagram1" ZoomLevel="70" DisplayType="true" >
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Person" Width="1.5" PointX="3.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Address" Width="1.5" PointX="3.375" PointY="7.375" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Member" Width="1.5" PointX="7.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Organization" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
         <AssociationConnector Association="AGOKnightsDBModel.OrganizationMembership" />
         <AssociationConnector Association="AGOKnightsDBModel.PersonMembership" />
-        <EntityTypeShape EntityType="AGOKnightsDBModel.Calendar" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Calendar" Width="1.5" PointX="7.75" PointY="6" IsExpanded="true" />
         <AssociationConnector Association="AGOKnightsDBModel.OrganizationCalendar" />
-        <EntityTypeShape EntityType="AGOKnightsDBModel.Event" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Event" Width="1.5" PointX="5.5" PointY="2.625" />
         <AssociationConnector Association="AGOKnightsDBModel.EventHost" />
         <AssociationConnector Association="AGOKnightsDBModel.EventSponsor" />
         <AssociationConnector Association="AGOKnightsDBModel.NonRecurringCalendarEvent" />
-        <EntityTypeShape EntityType="AGOKnightsDBModel.Office" Width="1.5" PointX="6" PointY="8.375" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Office" Width="1.5" PointX="9.75" PointY="1" />
         <AssociationConnector Association="AGOKnightsDBModel.OfficeMember" />
         <AssociationConnector Association="AGOKnightsDBModel.OrganizationOffice" />
         <AssociationConnector Association="AGOKnightsDBModel.EventSignIn" />
-        <AssociationConnector Association="AGOKnightsDBModel.AddressPerson" />
-        <AssociationConnector Association="AGOKnightsDBModel.EventAddress" />
         <AssociationConnector Association="AGOKnightsDBModel.OfficeCalendar" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.ShirtSize" Width="1.5" PointX="0.5" PointY="4.5" />
+        <AssociationConnector Association="AGOKnightsDBModel.PersonShirtSize" />
+        <EntityTypeShape EntityType="AGOKnightsDBModel.Budget" Width="1.5" PointX="12.25" PointY="4.5" />
+        <AssociationConnector Association="AGOKnightsDBModel.OfficeBudget" />
+        <AssociationConnector Association="AGOKnightsDBModel.EventAddress" />
+        <AssociationConnector Association="AGOKnightsDBModel.PersonAddress" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

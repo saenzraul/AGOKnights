@@ -381,13 +381,27 @@
             <End Role="Address" EntitySet="Addresses" />
             <End Role="Person" EntitySet="People" />
           </AssociationSet>
+          <AssociationSet Name="OfficeCalendar" Association="AGOKnightsDBModel.OfficeCalendar">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="Calendar" EntitySet="Calendars" />
+          </AssociationSet>
+          <EntitySet Name="ShirtSizes" EntityType="AGOKnightsDBModel.ShirtSize" />
+          <AssociationSet Name="PersonShirtSize" Association="AGOKnightsDBModel.PersonShirtSize">
+            <End Role="Person" EntitySet="People" />
+            <End Role="ShirtSize" EntitySet="ShirtSizes" />
+          </AssociationSet>
+          <EntitySet Name="Budgets" EntityType="AGOKnightsDBModel.Budget" />
+          <AssociationSet Name="OfficeBudget" Association="AGOKnightsDBModel.OfficeBudget">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="Budget" EntitySet="Budgets" />
+          </AssociationSet>
           <AssociationSet Name="EventAddress" Association="AGOKnightsDBModel.EventAddress">
             <End Role="Event" EntitySet="Events" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
-          <AssociationSet Name="OfficeCalendar" Association="AGOKnightsDBModel.OfficeCalendar">
-            <End Role="Office" EntitySet="Offices" />
-            <End Role="Calendar" EntitySet="Calendars" />
+          <AssociationSet Name="PersonAddress" Association="AGOKnightsDBModel.PersonAddress">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -404,19 +418,25 @@
           <NavigationProperty Name="HostedEvents" Relationship="AGOKnightsDBModel.EventHost" FromRole="Person" ToRole="NonRecurringEvent" />
           <NavigationProperty Name="SponsoredEvents" Relationship="AGOKnightsDBModel.EventSponsor" FromRole="Person" ToRole="NonRecurringEvent" />
           <NavigationProperty Name="EventsAttended" Relationship="AGOKnightsDBModel.EventSignIn" FromRole="Person" ToRole="Event" />
-          <NavigationProperty Name="Addresses" Relationship="AGOKnightsDBModel.AddressPerson" FromRole="Person" ToRole="Address" />
+          <NavigationProperty Name="ShirtSize" Relationship="AGOKnightsDBModel.PersonShirtSize" FromRole="Person" ToRole="ShirtSize" />
+          <Property Name="ShirtSizeId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Address" Relationship="AGOKnightsDBModel.PersonAddress" FromRole="Person" ToRole="Address" />
+          <Property Name="AddressId" Type="Int32" Nullable="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" />
+          <Property Name="PhoneIsPublic" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="AddressId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Street" Type="String" Nullable="false" />
           <Property Name="City" Type="String" Nullable="false" />
           <Property Name="State" Type="String" Nullable="false" />
           <Property Name="Alias" Type="String" Nullable="false" />
-          <NavigationProperty Name="People" Relationship="AGOKnightsDBModel.AddressPerson" FromRole="Address" ToRole="Person" />
           <NavigationProperty Name="Events" Relationship="AGOKnightsDBModel.EventAddress" FromRole="Address" ToRole="Event" />
+          <NavigationProperty Name="People" Relationship="AGOKnightsDBModel.PersonAddress" FromRole="Address" ToRole="Person" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -428,6 +448,8 @@
           <NavigationProperty Name="Person" Relationship="AGOKnightsDBModel.PersonMembership" FromRole="Membership" ToRole="Person" />
           <Property Name="PersonId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Offices" Relationship="AGOKnightsDBModel.OfficeMember" FromRole="Member" ToRole="Office" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Organization">
           <Key>
@@ -505,7 +527,7 @@
           <Property Name="LocationId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Attendees" Relationship="AGOKnightsDBModel.EventSignIn" FromRole="Event" ToRole="Person" />
           <NavigationProperty Name="Address" Relationship="AGOKnightsDBModel.EventAddress" FromRole="Event" ToRole="Address" />
-          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" Nullable="true" />
         </EntityType>
         <Association Name="EventHost">
           <End Type="AGOKnightsDBModel.Person" Role="Person" Multiplicity="1" />
@@ -548,6 +570,7 @@
           <Property Name="OrganizationId" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="true" />
           <NavigationProperty Name="Calendar" Relationship="AGOKnightsDBModel.OfficeCalendar" FromRole="Office" ToRole="Calendar" />
+          <NavigationProperty Name="Budgets" Relationship="AGOKnightsDBModel.OfficeBudget" FromRole="Office" ToRole="Budget" />
         </EntityType>
         <Association Name="OfficeMember">
           <End Type="AGOKnightsDBModel.Office" Role="Office" Multiplicity="*" />
@@ -581,21 +604,76 @@
           <End Type="AGOKnightsDBModel.Address" Role="Address" Multiplicity="*" />
           <End Type="AGOKnightsDBModel.Person" Role="Person" Multiplicity="*" />
         </Association>
+        <Association Name="OfficeCalendar">
+          <End Type="AGOKnightsDBModel.Office" Role="Office" Multiplicity="0..1" />
+          <End Type="AGOKnightsDBModel.Calendar" Role="Calendar" Multiplicity="1" />
+        </Association>
+        <EntityType Name="ShirtSize">
+          <Key>
+            <PropertyRef Name="ShirtSizeId" />
+          </Key>
+          <Property Name="ShirtSizeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Size" Type="String" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="AGOKnightsDBModel.PersonShirtSize" FromRole="ShirtSize" ToRole="Person" />
+        </EntityType>
+        <Association Name="PersonShirtSize">
+          <End Type="AGOKnightsDBModel.Person" Role="Person" Multiplicity="*" />
+          <End Type="AGOKnightsDBModel.ShirtSize" Role="ShirtSize" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ShirtSize">
+              <PropertyRef Name="ShirtSizeId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="ShirtSizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Budget">
+          <Key>
+            <PropertyRef Name="BudgetId" />
+          </Key>
+          <Property Name="BudgetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Limit" Type="Decimal" Nullable="false" />
+          <Property Name="EffectiveStart" Type="DateTime" Nullable="false" />
+          <Property Name="EffectiveEnd" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Office" Relationship="AGOKnightsDBModel.OfficeBudget" FromRole="Budget" ToRole="Office" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="OfficeBudget">
+          <End Type="AGOKnightsDBModel.Office" Role="Office" Multiplicity="1" />
+          <End Type="AGOKnightsDBModel.Budget" Role="Budget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="Budget">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EventAddress">
           <End Type="AGOKnightsDBModel.Event" Role="Event" Multiplicity="*" />
-          <End Type="AGOKnightsDBModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="AGOKnightsDBModel.Address" Role="Address" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Address">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="AddressId" />
             </Principal>
             <Dependent Role="Event">
               <PropertyRef Name="AddressId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="OfficeCalendar">
-          <End Type="AGOKnightsDBModel.Office" Role="Office" Multiplicity="0..1" />
-          <End Type="AGOKnightsDBModel.Calendar" Role="Calendar" Multiplicity="1" />
+        <Association Name="PersonAddress">
+          <End Type="AGOKnightsDBModel.Person" Role="Person" Multiplicity="*" />
+          <End Type="AGOKnightsDBModel.Address" Role="Address" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -618,7 +696,7 @@
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="IsTypeOf(AGOKnightsDBModel.Address)">
         <MappingFragment StoreEntitySet="Addresses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddressId" ColumnName="Id" />
           <ScalarProperty Name="Street" ColumnName="Street" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="State" ColumnName="State" />
@@ -665,7 +743,6 @@
           <ScalarProperty Name="Recurrance" ColumnName="Recurrance" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -699,7 +776,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="AddressPerson" TypeName="AGOKnightsDBModel.AddressPerson" StoreEntitySet="AddressPerson">
       <EndProperty Name="Address">
-        <ScalarProperty Name="Id" ColumnName="Addresses_Id" />
+        <ScalarProperty Name="AddressId" ColumnName="Addresses_Id" />
       </EndProperty>
       <EndProperty Name="Person">
         <ScalarProperty Name="PersonId" ColumnName="People_PersonId" />

@@ -20,7 +20,6 @@ namespace AGOKnights
             this.HostedEvents = new HashSet<Event>();
             this.SponsoredEvents = new HashSet<Event>();
             this.EventsAttended = new HashSet<Event>();
-            this.Addresses = new HashSet<Address>();
         }
     
         public int PersonId { get; set; }
@@ -29,11 +28,17 @@ namespace AGOKnights
         public string BirthDate { get; set; }
         public string Nickname { get; set; }
         public string StudentId { get; set; }
+        public Nullable<int> ShirtSizeId { get; set; }
+        public Nullable<int> AddressId { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool PhoneIsPublic { get; set; }
+        public string Email { get; set; }
     
         public virtual ICollection<Member> Memberships { get; set; }
         public virtual ICollection<Event> HostedEvents { get; set; }
         public virtual ICollection<Event> SponsoredEvents { get; set; }
         public virtual ICollection<Event> EventsAttended { get; set; }
-        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ShirtSize ShirtSize { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

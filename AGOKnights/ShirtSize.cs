@@ -12,21 +12,16 @@ namespace AGOKnights
     using System;
     using System.Collections.Generic;
     
-    public partial class Address
+    public partial class ShirtSize
     {
-        public Address()
+        public ShirtSize()
         {
-            this.Events = new HashSet<Event>();
             this.People = new HashSet<Person>();
         }
     
-        public int AddressId { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Alias { get; set; }
+        public int ShirtSizeId { get; set; }
+        public string Size { get; set; }
     
-        public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<Person> People { get; set; }
     }
 }

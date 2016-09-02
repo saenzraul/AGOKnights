@@ -32,5 +32,7 @@ namespace AGOKnights
         public virtual DbSet<Calendar> Calendars { get; set; }
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Office> Offices { get; set; }
+        public virtual DbSet<ShirtSize> ShirtSizes { get; set; }
+        public virtual DbSet<Budget> Budgets { get; set; }
     }
 }

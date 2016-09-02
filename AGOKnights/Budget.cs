@@ -12,21 +12,14 @@ namespace AGOKnights
     using System;
     using System.Collections.Generic;
     
-    public partial class Address
+    public partial class Budget
     {
-        public Address()
-        {
-            this.Events = new HashSet<Event>();
-            this.People = new HashSet<Person>();
-        }
+        public int BudgetId { get; set; }
+        public decimal Limit { get; set; }
+        public System.DateTime EffectiveStart { get; set; }
+        public System.DateTime EffectiveEnd { get; set; }
+        public int OfficeId { get; set; }
     
-        public int AddressId { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Alias { get; set; }
-    
-        public virtual ICollection<Event> Events { get; set; }
-        public virtual ICollection<Person> People { get; set; }
+        public virtual Office Office { get; set; }
     }
 }
