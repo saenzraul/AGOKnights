@@ -3,10 +3,10 @@
 <div class="event-details-bkg">
 	<div class="event-details">
 		<span class="event-details-header">When</span>
-		<span class="event-details-text">September 18th, 2016 at 7:00pm</span> <!-- Edit here -->
+		<span class="event-details-text">September 27th, 2016 at 6:00pm</span> <!-- Edit here -->
 		<span class="event-details-header">Where</span>
-		<span class="event-details-text">Student Center</span> <!-- Edit here -->
+		<span class="event-details-text">DAH 217</span> <!-- Edit here -->
 		<span class="event-details-header">What</span>
-		<span class="event-details-text">In classic Alpha fashion, come enjoy a night of board/card games in the Student Center.</span> <!-- Edit here -->
+		<span class="event-details-text">Come interview with the officers of Alpha to be inducted as a Knight of Alpha Gamma Omega. We'd love to have you!</span> <!-- Edit here -->
 	</div>
 </div>

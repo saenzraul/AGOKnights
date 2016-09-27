@@ -5761,7 +5761,7 @@ button.close {
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
   line-height: 1;
-  width: 75%;
+  width: auto;
   max-height: 500px;
   margin-left:auto;
   margin-right:auto;
@@ -5785,7 +5785,6 @@ button.close {
 .carousel-inner > .next {
   left: 100%;
   border-bottom-left-radius:15px;
-  bor
 }
 .carousel-inner > .prev {
   left: -100%;
@@ -6650,11 +6649,16 @@ a.event-name:focus {
     }
     .social-banners {
         top: 55px;
+        max-height: 500px;
         right: 140px;
     }
     .social-banners a {
         width: 61px;
         height: 95px;
+    }
+    .banner-img img {
+        width: 100%;
+        height: auto;
     }
 }
 
